@@ -1,0 +1,73 @@
+.contentWrapper {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	max-height: 100%;
+
+	padding-bottom: 4rem;
+	padding-left: 16rem;
+	padding-top: 5rem;
+
+	overflow-y: auto;
+	color: #212121;
+	z-index: 1;
+	transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+	background-color: aliceblue;
+}
+
+.mainCardWrapper {
+	width: 64rem;
+	margin: 0 auto;
+	padding: 3rem;
+}
+
+.invoiceHeader {
+	display: flex;
+	.tableWrapper {
+		display: flex;
+		flex-grow: 2;
+		.table {
+			width: 100%;
+
+			.title {
+				font-size: 1.4rem;
+				text-transform: uppercase;
+			}
+
+			.details {
+				font-size: 0.8rem;
+				color: grey;
+				text-align: right;
+			}
+
+			.invoiceNumber {
+				font-size: 1.1rem;
+				color: gray;
+			}
+
+			.name {
+				font-size: 1.1rem;
+				text-align: right;
+			}
+
+			.time,
+			.email {
+				font-size: 0.8rem;
+			}
+
+			.email {
+				text-align: right;
+			}
+		}
+	}
+
+	.buttonWrapper {
+		display: flex;
+		align-items: center;
+		padding: 0 2rem;
+	}
+}
