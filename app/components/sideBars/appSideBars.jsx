@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 
 import defaultTheme from './appSideBar.scss';
+import NavList from 'components/lists/navList';
 
 const Test = () => <div>hello</div>;
 
@@ -15,9 +16,7 @@ class AppSideBar extends Component {
 		return (
 			<aside className={classnames(theme.sideBarWrapper)}>
 				<List selectable ripple>
-					<ListItem itemContent={<Test />} />
-					<ListDivider />
-					<ListItem itemContent={<Test />} />
+					<ListItem itemContent={<NavList />} />
 				</List>
 			</aside>
 		);

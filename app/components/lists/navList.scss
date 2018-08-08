@@ -1,0 +1,45 @@
+.listItem {
+	width: 100%;
+	// border: 1px solid white;
+	display: flex;
+	flex-direction: column;
+	.row {
+		display: flex;
+		.element {
+			display: flex;
+			flex: 1 1 auto;
+		}
+	}
+}
+
+.invoiceHeader,
+.invoiceBody {
+	border-top: 1px solid #bababa;
+	border-bottom: 1px solid #bababa;
+
+	.row {
+		.element {
+			padding: 0 1rem;
+			&:first-child {
+				flex-grow: 4;
+				justify-content: flex-start;
+			}
+
+			line-height: 2.8rem;
+			justify-content: center;
+		}
+	}
+}
+
+.subTotalGrandTotal {
+	font-size: 1rem;
+}
+
+.invoiceBody {
+	border-top: none;
+	.row {
+		.element {
+			line-height: 3.6rem;
+		}
+	}
+}

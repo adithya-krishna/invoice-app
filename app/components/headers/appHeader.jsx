@@ -3,7 +3,7 @@ import { themr } from 'react-css-themr';
 import classnames from 'classnames';
 
 import { Button } from 'react-toolbox/lib/button';
-import AppBar from 'react-toolbox/lib/app_bar';
+import { AppBar } from 'react-toolbox/lib/app_bar';
 
 import defaultTheme from './appHeader.scss';
 

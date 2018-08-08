@@ -6,6 +6,8 @@ import { Card, CardText } from 'react-toolbox/lib/card';
 import defaultTheme from './mainContent.scss';
 
 import CardHeader from 'components/headers/cardHeader';
+import InvoiceList from 'components/lists/invoiceList';
+import SubTotalList from 'components/lists/subTotalList';
 
 class AppMainContent extends Component {
 	render() {
@@ -15,6 +17,10 @@ class AppMainContent extends Component {
 			<article className={classnames(theme.contentWrapper)}>
 				<Card className={theme.mainCardWrapper}>
 					<CardHeader theme={theme} />
+
+					<InvoiceList />
+
+					<SubTotalList />
 				</Card>
 			</article>
 		);
