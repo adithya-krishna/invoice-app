@@ -17,12 +17,12 @@
 	transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
 	background-color: aliceblue;
-}
 
-.mainCardWrapper {
-	width: 64rem;
-	margin: 0 auto;
-	padding: 3rem;
+	.card {
+		width: 64rem;
+		margin: 0 auto;
+		padding: 3rem;
+	}
 }
 
 .invoiceHeader {

@@ -1,0 +1,46 @@
+.formGroup {
+	margin-bottom: 0.8rem;
+
+	.input {
+		display: block;
+		width: 100%;
+		height: 38px;
+		padding: 6px 12px;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		border-radius: 2px;
+		resize: none;
+
+		&::-webkit-input-placeholder {
+			color: #999;
+			font-size: 0.8rem;
+		}
+
+		&::-ms-expand {
+			border: 0;
+			background-color: transparent;
+		}
+
+		&[disabled],
+		&[readonly],
+		fieldset[disabled] & {
+			background-color: #eee;
+			opacity: 1;
+		}
+	}
+
+	textarea.input {
+		height: auto;
+		line-height: 20px;
+	}
+
+	.label {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+		font-size: 0.8rem;
+
+		.required {
+			color: red;
+		}
+	}
+}

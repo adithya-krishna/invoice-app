@@ -15,7 +15,7 @@ class AppMainContent extends Component {
 
 		return (
 			<article className={classnames(theme.contentWrapper)}>
-				<Card className={theme.mainCardWrapper}>
+				<Card theme={theme}>
 					<CardHeader theme={theme} />
 
 					<InvoiceList />

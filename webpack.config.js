@@ -15,7 +15,7 @@ const vendorStyleLoaders = [
 			modules: true,
 			sourceMap: true,
 			importLoaders: 1,
-			localIdentName: '[local]',
+			localIdentName: '[name]__[local]--[hash:base64:5]',
 			minimize: false
 		}
 	},
@@ -101,7 +101,6 @@ const baseConfig = {
 			},
 			{
 				test: /(\.scss)$/,
-				exclude: [path.resolve(__dirname, 'app/css')],
 				use: extractSass.extract({
 					fallback: 'style-loader',
 					use: loaders
