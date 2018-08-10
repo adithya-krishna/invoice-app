@@ -6,22 +6,12 @@ import { InputField, InputTextArea } from 'components/forms/field';
 import gridTheme from 'styles/grid.scss';
 
 class UserForm extends Component {
-	state = {
-		name: '',
-		phone: '',
-		address: '',
-		email: '',
-		pincode: ''
-	};
-
-	onFieldChange = e => {
-		const { name, value } = e.target;
-		this.setState({ [name]: value });
-	};
-
 	render() {
-		const { theme } = this.props;
-		const { name, phone, address, email, pincode } = this.state;
+		const {
+			theme,
+			data: { name, phone, address, email, pincode },
+			onFieldChange
+		} = this.props;
 
 		return (
 			<form className={theme.formWrapper}>
@@ -34,7 +24,7 @@ class UserForm extends Component {
 							label={'Full Name'}
 							value={name}
 							required
-							onFieldChange={this.onFieldChange}
+							onFieldChange={onFieldChange}
 						/>
 					</div>
 					<div className={classnames(theme.col, theme.col__1_of_2)}>
@@ -44,7 +34,7 @@ class UserForm extends Component {
 							label={'Phone Number'}
 							value={phone}
 							required
-							onFieldChange={this.onFieldChange}
+							onFieldChange={onFieldChange}
 						/>
 					</div>
 				</div>
@@ -56,7 +46,7 @@ class UserForm extends Component {
 							label={'Address'}
 							rows={5}
 							value={address}
-							onFieldChange={this.onFieldChange}
+							onFieldChange={onFieldChange}
 						/>
 					</div>
 					<div className={classnames(theme.col, theme.col__1_of_2)}>
@@ -67,7 +57,7 @@ class UserForm extends Component {
 							label={'Email ID'}
 							value={email}
 							required
-							onFieldChange={this.onFieldChange}
+							onFieldChange={onFieldChange}
 						/>
 						<InputField
 							id={'pincode'}
@@ -75,7 +65,7 @@ class UserForm extends Component {
 							placeholder={'560022'}
 							label={'Pincode'}
 							value={pincode}
-							onFieldChange={this.onFieldChange}
+							onFieldChange={onFieldChange}
 						/>
 					</div>
 				</div>

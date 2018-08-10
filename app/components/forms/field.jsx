@@ -18,12 +18,14 @@ const withWrappedLabel = Component => {
 	}) => {
 		return (
 			<div className={theme.formGroup}>
-				<label htmlFor={id} className={theme.label}>
-					{label}{' '}
-					{required ? (
-						<span className={theme.required}>*</span>
-					) : null}
-				</label>
+				{label ? (
+					<label htmlFor={id} className={theme.label}>
+						{label}
+						{required ? (
+							<span className={theme.required}>*</span>
+						) : null}
+					</label>
+				) : null}
 				<Component
 					ref={ref}
 					id={id}

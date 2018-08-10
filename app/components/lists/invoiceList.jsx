@@ -4,14 +4,28 @@ import classnames from 'classnames';
 
 import defaultTheme from './navList.scss';
 import InvoiceListItem from './invoiceListItem';
+import InvoiceItemForm from 'components/forms/invoiceItemForm';
 
 class InvoiceList extends Component {
 	render() {
-		const { theme } = this.props;
+		const {
+			theme,
+			editable,
+			productFormData,
+			onFieldChange,
+			onFormSubmit
+		} = this.props;
 		return (
 			<div className={theme.invoiceListWrapper}>
 				<InvoiceListItem header />
 				<InvoiceListItem />
+				{editable ? (
+					<InvoiceItemForm
+						data={productFormData}
+						onFieldChange={onFieldChange}
+						onFormSubmit={onFormSubmit}
+					/>
+				) : null}
 			</div>
 		);
 	}
