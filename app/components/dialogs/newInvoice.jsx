@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
-import { Button } from 'react-toolbox/lib/button';
 
 import defaultTheme from './newInvoice.scss';
 import DialogHeader from 'components/headers/dialogHeader';

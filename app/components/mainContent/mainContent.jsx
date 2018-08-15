@@ -9,23 +9,19 @@ import CardHeader from 'components/headers/cardHeader';
 import InvoiceList from 'components/lists/invoiceList';
 import SubTotalList from 'components/lists/subTotalList';
 
-class AppMainContent extends Component {
-	render() {
-		const { theme } = this.props;
+const AppMainContent = ({ theme }) => {
+	return (
+		<article className={classnames(theme.contentWrapper)}>
+			<Card theme={theme}>
+				<CardHeader theme={theme} />
 
-		return (
-			<article className={classnames(theme.contentWrapper)}>
-				<Card theme={theme}>
-					<CardHeader theme={theme} />
+				<InvoiceList />
 
-					<InvoiceList />
-
-					<SubTotalList />
-				</Card>
-			</article>
-		);
-	}
-}
+				<SubTotalList />
+			</Card>
+		</article>
+	);
+};
 
 const ThemedAppMainContent = themr('AppMainContent', defaultTheme)(
 	AppMainContent

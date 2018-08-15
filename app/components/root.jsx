@@ -10,14 +10,10 @@ import App from 'app';
 const store = configureStore();
 
 /*----------  Wrapping redux Provider ----------*/
-class Root extends Component {
-	render() {
-		return (
-			<Provider store={store}>
-				<App />
-			</Provider>
-		);
-	}
-}
+const Root = () => (
+	<Provider store={store}>
+		<App />
+	</Provider>
+);
 
 export default Root;
