@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import './root.scss';
 
 import configureStore from 'store/configureStore';
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
 import App from 'app';
 
@@ -15,9 +14,7 @@ class Root extends Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<ThemeProvider theme={{}}>
-					<App />
-				</ThemeProvider>
+				<App />
 			</Provider>
 		);
 	}

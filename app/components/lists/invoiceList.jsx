@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
+import map from 'lodash/map';
+import values from 'lodash/values';
 import classnames from 'classnames';
 
 import defaultTheme from './navList.scss';
@@ -9,6 +11,8 @@ import InvoiceItemForm from 'components/forms/invoiceItemForm';
 class InvoiceList extends Component {
 	render() {
 		const {
+			headers,
+			entries,
 			theme,
 			editable,
 			productFormData,
@@ -17,10 +21,20 @@ class InvoiceList extends Component {
 		} = this.props;
 		return (
 			<div className={theme.invoiceListWrapper}>
-				<InvoiceListItem header />
-				<InvoiceListItem />
+				<InvoiceListItem header items={headers} />
+
+				{map(entries, (entry, index) => {
+					return (
+						<InvoiceListItem
+							key={`${entry}${index}`}
+							items={values(entry)}
+						/>
+					);
+				})}
+
 				{editable ? (
 					<InvoiceItemForm
+						theme={theme}
 						data={productFormData}
 						onFieldChange={onFieldChange}
 						onFormSubmit={onFormSubmit}

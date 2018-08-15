@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
 import classnames from 'classnames';
-import { Card, CardText } from 'react-toolbox/lib/card';
+import { Card } from 'react-toolbox/lib/card';
 
 import defaultTheme from './mainContent.scss';
 

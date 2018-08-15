@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
@@ -9,10 +10,17 @@ import defaultTheme from './newInvoice.scss';
 import DialogHeader from 'components/headers/dialogHeader';
 import CustomerDetails from 'components/mainContent/customerDetails';
 import ProductDetails from 'components/mainContent/productDetails';
+import FormActions from 'actions/formActions';
+
+const initialProductFormData = {
+	itemName: '',
+	quantity: '',
+	value: ''
+};
 
 class NewInvoiceDialog extends Component {
 	state = {
-		isCustomerDetailsPage: false,
+		isCustomerDetailsPage: true,
 		userFormData: {
 			name: '',
 			phone: '',
@@ -20,12 +28,14 @@ class NewInvoiceDialog extends Component {
 			email: '',
 			pincode: ''
 		},
-		productFormData: {
-			itemName: '',
-			quantity: '',
-			value: ''
-		}
+		products: [],
+		productFormData: { ...initialProductFormData }
 	};
+
+	componentDidMount() {
+		const { initInvoiceForm } = this.props;
+		initInvoiceForm();
+	}
 
 	getActionButton = () => {
 		const { isCustomerDetailsPage } = this.state;
@@ -43,7 +53,7 @@ class NewInvoiceDialog extends Component {
 						label: 'Save',
 						primary: true,
 						raised: true,
-						onClick: this.props.handleToggle,
+						onClick: this.onProductDetailsSubmit,
 						theme
 				  }
 		];
@@ -51,6 +61,14 @@ class NewInvoiceDialog extends Component {
 
 	onCustomerDetailsSubmit = () => {
 		this.setState({ isCustomerDetailsPage: false });
+	};
+
+	onProductDetailsSubmit = () => {
+		const { userFormData, products } = this.state;
+		const { saveInvoice } = this.props;
+
+		saveInvoice({ customer: userFormData, products });
+		this.setState({ isCustomerDetailsPage: true });
 	};
 
 	onEditCustomer = () => {
@@ -72,8 +90,21 @@ class NewInvoiceDialog extends Component {
 		}
 	};
 
+	resetProductsForm = () => {
+		this.setState(state => {
+			return {
+				...state,
+				productFormData: { ...initialProductFormData }
+			};
+		});
+	};
+
 	onProductFormSubmit = () => {
-		console.log('submitted');
+		// validate here
+		this.setState(
+			{ products: [...this.state.products, this.state.productFormData] },
+			this.resetProductsForm
+		);
 	};
 
 	render() {
@@ -81,6 +112,7 @@ class NewInvoiceDialog extends Component {
 		const {
 			userFormData,
 			productFormData,
+			products,
 			isCustomerDetailsPage
 		} = this.state;
 
@@ -88,7 +120,7 @@ class NewInvoiceDialog extends Component {
 			<Dialog
 				theme={theme}
 				actions={this.getActionButton()}
-				active
+				active={active}
 				onEscKeyDown={handleToggle}
 				onOverlayClick={handleToggle}
 			>
@@ -108,9 +140,9 @@ class NewInvoiceDialog extends Component {
 				) : (
 					<ProductDetails
 						userFormData={userFormData}
+						products={products}
 						productFormData={productFormData}
 						handleToggle={handleToggle}
-						onFieldChange={this.onFieldChange}
 						onEditCustomer={this.onEditCustomer}
 						onFieldChange={this.onFieldChange}
 						onProductFormSubmit={this.onProductFormSubmit}
@@ -124,4 +156,12 @@ class NewInvoiceDialog extends Component {
 const ThemedNewInvoiceDialog = themr('NewInvoiceDialog', defaultTheme)(
 	NewInvoiceDialog
 );
-export default ThemedNewInvoiceDialog;
+
+// returning whole state in map state to props.
+export default connect(
+	null,
+	{
+		saveInvoice: FormActions.saveInvoice,
+		initInvoiceForm: FormActions.initInvoiceForm
+	}
+)(ThemedNewInvoiceDialog);

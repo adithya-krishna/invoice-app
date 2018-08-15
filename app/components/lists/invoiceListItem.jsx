@@ -1,30 +1,40 @@
 import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
+import map from 'lodash/map';
 import classnames from 'classnames';
 
 import defaultTheme from './navList.scss';
+import gridTheme from 'styles/grid.scss';
 
 class InvoiceListItem extends Component {
 	render() {
-		const { theme, header } = this.props;
+		const { theme, header, items } = this.props;
 		return (
 			<div
-				className={classnames(theme.listItem, {
+				className={classnames(theme.row, {
 					[theme.invoiceHeader]: header,
 					[theme.invoiceBody]: !header
 				})}
 			>
-				<div className={theme.row}>
-					<div className={theme.element}>#INV1122</div>
-					<div className={theme.element}>11:35 am - today</div>
-					<div className={theme.element}>11:35 am - today</div>
-				</div>
+				{map(items, (item, itemIndex) => (
+					<div
+						key={`${item}${itemIndex}`}
+						className={classnames(
+							theme.col,
+							{ [theme.col__2_of_4]: itemIndex === 0 },
+							{ [theme.col__1_of_4]: itemIndex !== 0 }
+						)}
+					>
+						{item}
+					</div>
+				))}
 			</div>
 		);
 	}
 }
 
-const ThemedInvoiceListItem = themr('InvoiceListItem', defaultTheme)(
-	InvoiceListItem
-);
+const ThemedInvoiceListItem = themr('InvoiceListItem', {
+	...defaultTheme,
+	...gridTheme
+})(InvoiceListItem);
 export default ThemedInvoiceListItem;

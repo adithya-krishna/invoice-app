@@ -14,7 +14,6 @@ class AppHeader extends Component {
 	};
 
 	handleToggle = () => {
-		console.log('here');
 		this.setState({ active: !this.state.active });
 	};
 
@@ -23,9 +22,10 @@ class AppHeader extends Component {
 		return (
 			<Fragment>
 				<AppBar title={'Dashboard'} flat fixed />
+
 				<div className={classnames(theme.floatingButtonWrapper)}>
 					<Button
-						icon="add"
+						icon={'add'}
 						floating
 						accent
 						onClick={this.handleToggle}
