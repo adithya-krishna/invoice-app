@@ -1,8 +1,29 @@
+@import 'styles/colors.scss';
+$standardBorderRadius: 4px;
+
 .navigation {
 	padding: 16px;
-	background-color: #bababa;
+	background-color: color(solitude);
+	border-bottom-left-radius: $standardBorderRadius;
+	border-bottom-right-radius: $standardBorderRadius;
 
 	.button {
 		width: 10rem;
+	}
+}
+
+.wrapper {
+	height: 100%;
+	width: 100%;
+	.overlay {
+		opacity: 0.3;
+		height: 100%;
+		width: 100%;
+	}
+
+	.dialog {
+		border-radius: $standardBorderRadius;
+		box-shadow: 0 0.938em 2.188em rgba(50, 50, 93, 0.1),
+			0 0.313em 0.938em rgba(0, 0, 0, 0.07);
 	}
 }

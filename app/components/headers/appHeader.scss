@@ -1,6 +1,15 @@
+@import 'styles/colors.scss';
+
+.appBar {
+	background: color(lochmara);
+}
+
 .floatingButtonWrapper {
 	position: fixed;
 	top: 2.6rem;
 	right: 2.8rem;
 	z-index: 300;
+	.accent:not([disabled]).floating {
+		background: color(brilliant-rose);
+	}
 }

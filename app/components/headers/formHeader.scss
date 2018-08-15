@@ -26,6 +26,7 @@
 	.rightCustomerDetails {
 		display: flex;
 		justify-content: space-between;
+		min-width: 12rem;
 
 		.details {
 			display: flex;

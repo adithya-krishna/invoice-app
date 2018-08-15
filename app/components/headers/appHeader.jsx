@@ -33,10 +33,11 @@ class AppHeader extends Component {
 		} = this.props;
 		return (
 			<Fragment>
-				<AppBar title={'Dashboard'} flat fixed />
+				<AppBar theme={theme} title={'Dashboard'} flat fixed />
 
 				<div className={classnames(theme.floatingButtonWrapper)}>
 					<Button
+						theme={theme}
 						icon={'add'}
 						floating
 						accent
