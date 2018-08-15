@@ -20,6 +20,7 @@ class AppSideBar extends PureComponent {
 						return (
 							<ListItem
 								key={`${key}`}
+								theme={theme}
 								itemContent={
 									<NavList
 										invoiceID={key}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { themr } from 'react-css-themr';
 
-import defaultTheme from './navList.scss';
+import defaultTheme from './lists.scss';
 import SubTotalListItem from './subTotalListItem';
 
 const SubTotalList = ({ theme }) => {

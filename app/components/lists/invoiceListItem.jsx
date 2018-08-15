@@ -3,7 +3,7 @@ import { themr } from 'react-css-themr';
 import map from 'lodash/map';
 import classnames from 'classnames';
 
-import defaultTheme from './navList.scss';
+import defaultTheme from './lists.scss';
 import gridTheme from 'styles/grid.scss';
 
 class InvoiceListItem extends Component {

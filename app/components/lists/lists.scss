@@ -7,6 +7,19 @@
 	align-items: center;
 }
 
+%center-vertically {
+	display: flex;
+	align-items: center;
+}
+
+%alignRight {
+	text-align: right;
+}
+
+%removePadding {
+	padding: 0;
+}
+
 .invoiceListWrapper {
 	color: #212121;
 	max-height: 20rem;
@@ -48,5 +61,40 @@
 				@extend %center-vertically;
 			}
 		}
+	}
+}
+
+.listItemWrapper {
+	font-size: 0.8rem;
+	color: white;
+	width: 100%;
+
+	.invoiceNumber,
+	.price {
+		font-weight: 500;
+	}
+
+	.invoiceNumber,
+	.time {
+		line-height: 2rem;
+	}
+
+	.time,
+	.name {
+		font-size: 0.6rem;
+	}
+
+	.name,
+	.price {
+		line-height: 1.2rem;
+	}
+
+	.count {
+		font-size: 0.7rem;
+	}
+
+	.time,
+	.price {
+		@extend %alignRight;
 	}
 }

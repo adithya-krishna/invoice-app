@@ -5,33 +5,35 @@ import classnames from 'classnames';
 import { pluralize } from 'utils';
 
 import gridTheme from 'styles/grid.scss';
+import defaultTheme from './lists.scss';
 
 const NavList = ({ theme, invoice: { products, customer }, invoiceID }) => {
 	const totalProducts = products.length;
 	const productCountLabel = pluralize('item', totalProducts);
+	const columnClasses = classnames(theme.col, theme.col__1_of_2);
 
 	return (
-		<div className={theme.listItem}>
-			<div className={theme.row}>
-				<div className={classnames(theme.col, theme.invoiceNumber)}>
+		<div className={theme.listItemWrapper}>
+			<div className={theme.row__no_gutter}>
+				<div className={classnames(columnClasses, theme.invoiceNumber)}>
 					{invoiceID}
 				</div>
-				<div className={classnames(theme.col, theme.time)}>
+				<div className={classnames(columnClasses, theme.time)}>
 					{'today'}
 				</div>
 			</div>
-			<div className={theme.row}>
-				<div className={classnames(theme.col, theme.name)}>
+			<div className={theme.row__no_gutter}>
+				<div className={classnames(theme.col, theme.count)}>
 					{`${productCountLabel} ${
 						totalProducts !== 0 ? `- ${totalProducts}` : ''
 					}`}
 				</div>
 			</div>
-			<div className={theme.row}>
-				<div className={classnames(theme.col, theme.name)}>
+			<div className={theme.row__no_gutter}>
+				<div className={classnames(columnClasses, theme.name)}>
 					{customer.name}
 				</div>
-				<div className={classnames(theme.col, theme.price)}>
+				<div className={classnames(columnClasses, theme.price)}>
 					3,500/-
 				</div>
 			</div>
@@ -39,5 +41,8 @@ const NavList = ({ theme, invoice: { products, customer }, invoiceID }) => {
 	);
 };
 
-const ThemedNavList = themr('NavList', gridTheme)(NavList);
+const ThemedNavList = themr('NavList', {
+	...gridTheme,
+	...defaultTheme
+})(NavList);
 export default ThemedNavList;

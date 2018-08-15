@@ -3,7 +3,7 @@ import { themr } from 'react-css-themr';
 import map from 'lodash/map';
 import values from 'lodash/values';
 
-import defaultTheme from './navList.scss';
+import defaultTheme from './lists.scss';
 import InvoiceListItem from './invoiceListItem';
 import InvoiceItemForm from 'components/forms/invoiceItemForm';
 

@@ -1,3 +1,8 @@
+@import 'styles/colors.scss';
+
+$sidebarBGColor: color(grayish-blue);
+$sidebarBGColorHovered: lighten($sidebarBGColor, 8%);
+
 .sideBarWrapper {
 	position: fixed;
 	top: 4rem;
@@ -7,7 +12,13 @@
 	display: flex;
 	width: 16rem;
 	flex-direction: column;
-	background-color: #2e373f;
-	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-		0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+	background-color: $sidebarBGColor;
+	color: color(white);
+
+	.item {
+		padding: 0.4rem 0.8rem 0.8rem;
+		&.selectable:not(.disabled):hover {
+			background-color: $sidebarBGColorHovered;
+		}
+	}
 }

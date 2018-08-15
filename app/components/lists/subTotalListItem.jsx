@@ -2,7 +2,7 @@ import React from 'react';
 import { themr } from 'react-css-themr';
 import classnames from 'classnames';
 
-import defaultTheme from './navList.scss';
+import defaultTheme from './lists.scss';
 
 const SubTotalListItem = ({ theme, grandTotal }) => {
 	return (

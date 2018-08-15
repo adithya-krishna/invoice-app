@@ -1,0 +1,37 @@
+$color-list: (
+	// sass map
+		//dark
+		grayish-blue: #2e373f,
+	//blues
+		dusk-blue: #2e5b9d,
+	dusk-blue-two: #264b82,
+	azure: #28a8fb,
+	cornflower-blue: #3f7cd9,
+	dark-sky-blue: #4e8eed,
+	//greens
+		cool-green: #34ca62,
+	//reds & yellows
+		salmon-two: #ff6666,
+	dull-red: #b34747,
+	//light
+		white: #ffffff,
+	off-white: #eeeeee,
+	//special
+		transparent: rgba(0, 0, 0, 0)
+);
+
+@function color($key, $alpha: null) {
+	@if map-has-key($color-list, $key) {
+		$color: map-get($color-list, $key);
+
+		@if ($alpha) {
+			@return rgba($color, $alpha);
+		}
+
+		@return $color;
+	}
+
+	@warn "Unknown `#{$key}` in $color-list.";
+
+	@return null;
+}
