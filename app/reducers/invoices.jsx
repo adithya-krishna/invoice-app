@@ -1,34 +1,11 @@
 import FormActions from 'actions/formActions';
 
-const customerReducer = (state = {}, action) => {
-	switch (action.type) {
-		case FormActions.SAVE_INVOICE_FORM: {
-			return { ...state, ...action.payload.customer };
-		}
-		default:
-			return state;
-	}
-};
-
-const productsReducer = (state = [], action) => {
-	switch (action.type) {
-		case FormActions.SAVE_INVOICE_FORM: {
-			return [...state, ...action.payload.products];
-		}
-		default:
-			return state;
-	}
-};
-
 export const invoices = (state = {}, action) => {
 	switch (action.type) {
 		case FormActions.SAVE_INVOICE_FORM: {
 			return {
 				...state,
-				[state.activeInvoiceID]: {
-					customer: customerReducer(state, action),
-					products: productsReducer(state, action)
-				}
+				...action.payload
 			};
 		}
 		default:

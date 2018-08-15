@@ -24,11 +24,11 @@ export default class FormActions {
 		};
 	};
 
-	static saveInvoice = data => {
+	static saveInvoice = (id, data) => {
 		FormActions.resetForm();
 		return {
 			type: FormActions.SAVE_INVOICE_FORM,
-			payload: data
+			payload: { [id]: data }
 		};
 	};
 }

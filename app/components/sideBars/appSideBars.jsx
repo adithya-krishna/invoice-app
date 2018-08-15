@@ -1,27 +1,43 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { themr } from 'react-css-themr';
 import classnames from 'classnames';
+import map from 'lodash/map';
 
 import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 
 import defaultTheme from './appSideBar.scss';
 import NavList from 'components/lists/navList';
 
-const Test = () => <div>hello</div>;
-
-class AppSideBar extends Component {
+class AppSideBar extends PureComponent {
 	render() {
-		const { theme } = this.props;
+		const { theme, invoices } = this.props;
 
 		return (
 			<aside className={classnames(theme.sideBarWrapper)}>
 				<List selectable ripple>
-					<ListItem itemContent={<NavList />} />
+					{map(invoices, (invoice, key) => {
+						return (
+							<ListItem
+								key={`${key}`}
+								itemContent={
+									<NavList
+										invoiceID={key}
+										invoice={invoice}
+									/>
+								}
+							/>
+						);
+					})}
 				</List>
 			</aside>
 		);
 	}
 }
 
+const mapStateToProps = state => ({
+	invoices: state.invoices
+});
+
 const ThemedAppSideBar = themr('AppSideBar', defaultTheme)(AppSideBar);
-export default ThemedAppSideBar;
+export default connect(mapStateToProps)(ThemedAppSideBar);

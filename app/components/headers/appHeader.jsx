@@ -9,26 +9,58 @@ import { AppBar } from 'react-toolbox/lib/app_bar';
 import defaultTheme from './appHeader.scss';
 import NewInvoiceDialog from 'components/dialogs/newInvoice';
 import DialogActions from 'actions/dialogActions';
+import FormActions from 'actions/formActions';
 
-const AppHeader = ({ theme, toggleDialog, isInvoiceDialogOpen }) => {
-	return (
-		<Fragment>
-			<AppBar title={'Dashboard'} flat fixed />
+class AppHeader extends Component {
+	handleNewInvoiceClick = () => {
+		const { toggleDialog, initInvoiceForm } = this.props;
+		initInvoiceForm();
+		toggleDialog();
+	};
 
-			<div className={classnames(theme.floatingButtonWrapper)}>
-				<Button icon={'add'} floating accent onClick={toggleDialog} />
-			</div>
+	handleSaveInvoice = data => {
+		const { activeInvoiceID, saveInvoice, toggleDialog } = this.props;
+		saveInvoice(activeInvoiceID, data);
+		toggleDialog();
+	};
 
-			<NewInvoiceDialog
-				handleToggle={toggleDialog}
-				active={isInvoiceDialogOpen}
-			/>
-		</Fragment>
-	);
-};
+	render() {
+		const {
+			theme,
+			toggleDialog,
+			isInvoiceDialogOpen,
+			activeInvoiceID
+		} = this.props;
+		return (
+			<Fragment>
+				<AppBar title={'Dashboard'} flat fixed />
+
+				<div className={classnames(theme.floatingButtonWrapper)}>
+					<Button
+						icon={'add'}
+						floating
+						accent
+						onClick={this.handleNewInvoiceClick}
+					/>
+				</div>
+
+				<NewInvoiceDialog
+					activeInvoiceID={activeInvoiceID}
+					saveInvoice={this.handleSaveInvoice}
+					handleToggle={toggleDialog}
+					active={isInvoiceDialogOpen}
+				/>
+			</Fragment>
+		);
+	}
+}
 
 const ThemedAppHeader = themr('AppHeader', defaultTheme)(AppHeader);
 export default connect(
 	state => state,
-	{ toggleDialog: DialogActions.toggleDialog }
+	{
+		toggleDialog: DialogActions.toggleDialog,
+		initInvoiceForm: FormActions.initInvoiceForm,
+		saveInvoice: FormActions.saveInvoice
+	}
 )(ThemedAppHeader);

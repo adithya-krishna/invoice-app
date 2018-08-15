@@ -2,29 +2,36 @@ import React, { Component } from 'react';
 import { themr } from 'react-css-themr';
 import classnames from 'classnames';
 
-import defaultTheme from './navList.scss';
+import { pluralize } from 'utils';
 
-const NavList = ({ theme }) => {
+import gridTheme from 'styles/grid.scss';
+
+const NavList = ({ theme, invoice: { products, customer }, invoiceID }) => {
+	const totalProducts = products.length;
+	const productCountLabel = pluralize('item', totalProducts);
+
 	return (
 		<div className={theme.listItem}>
 			<div className={theme.row}>
-				<div className={classnames(theme.element, theme.invoiceNumber)}>
-					#INV1122
+				<div className={classnames(theme.col, theme.invoiceNumber)}>
+					{invoiceID}
 				</div>
-				<div className={classnames(theme.element, theme.time)}>
-					11:35 am - today
-				</div>
-			</div>
-			<div className={theme.row}>
-				<div className={classnames(theme.element, theme.name)}>
-					Items - 05
+				<div className={classnames(theme.col, theme.time)}>
+					{'today'}
 				</div>
 			</div>
 			<div className={theme.row}>
-				<div className={classnames(theme.element, theme.name)}>
-					John Doe
+				<div className={classnames(theme.col, theme.name)}>
+					{`${productCountLabel} ${
+						totalProducts !== 0 ? `- ${totalProducts}` : ''
+					}`}
 				</div>
-				<div className={classnames(theme.element, theme.price)}>
+			</div>
+			<div className={theme.row}>
+				<div className={classnames(theme.col, theme.name)}>
+					{customer.name}
+				</div>
+				<div className={classnames(theme.col, theme.price)}>
 					3,500/-
 				</div>
 			</div>
@@ -32,5 +39,5 @@ const NavList = ({ theme }) => {
 	);
 };
 
-const ThemedNavList = themr('NavList', defaultTheme)(NavList);
+const ThemedNavList = themr('NavList', gridTheme)(NavList);
 export default ThemedNavList;
