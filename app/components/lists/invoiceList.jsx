@@ -21,7 +21,6 @@ const InvoiceList = ({
 			<InvoiceListItem header items={headers} />
 
 			{map(entries, (entry, index) => {
-				console.log(entry, values(entry));
 				return (
 					<InvoiceListItem
 						key={`listItem-${index}`}
