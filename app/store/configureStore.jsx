@@ -32,7 +32,8 @@ export default function configureStore() {
 						}
 					]
 				}
-			}
+			},
+			selectedInvoice: 'INV1000'
 		},
 		composeEnhancers(applyMiddleware(thunk))
 	);

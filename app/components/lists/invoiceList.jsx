@@ -21,9 +21,10 @@ const InvoiceList = ({
 			<InvoiceListItem header items={headers} />
 
 			{map(entries, (entry, index) => {
+				console.log(entry, values(entry));
 				return (
 					<InvoiceListItem
-						key={`${entry}${index}`}
+						key={`listItem-${index}`}
 						items={values(entry)}
 					/>
 				);

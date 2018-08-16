@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from 'react-toolbox/lib/button';
 
-const CardHeader = ({ theme }) => {
+const CardHeader = ({ theme, invoiceID, customer }) => {
 	return (
 		<div className={theme.invoiceHeader}>
 			<div className={theme.tableWrapper}>
@@ -13,14 +13,12 @@ const CardHeader = ({ theme }) => {
 							<td className={theme.details}>customer details</td>
 						</tr>
 						<tr>
-							<td className={theme.invoiceNumber}>#INV1122</td>
-							<td className={theme.name}>John Doe</td>
+							<td className={theme.invoiceNumber}>{invoiceID}</td>
+							<td className={theme.name}>{customer.name}</td>
 						</tr>
 						<tr>
-							<td className={theme.time}>11:35 am - today</td>
-							<td className={theme.email}>
-								johndoe@serviceprovider.com
-							</td>
+							<td className={theme.time}>today</td>
+							<td className={theme.email}>{customer.email}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -15,8 +15,17 @@ $sidebarBGColorHovered: lighten($sidebarBGColor, 8%);
 	background-color: $sidebarBGColor;
 	color: color(white);
 
+	.listItem {
+		&.listItemActive {
+			.item {
+				background-color: $sidebarBGColorHovered;
+			}
+		}
+	}
+
 	.item {
 		padding: 0.4rem 0.8rem 0.8rem;
+
 		&.selectable:not(.disabled):hover {
 			background-color: $sidebarBGColorHovered;
 		}

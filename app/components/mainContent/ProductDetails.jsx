@@ -3,6 +3,9 @@ import React, { Fragment } from 'react';
 import FormHeader from 'components/headers/formHeader';
 import InvoiceList from 'components/lists/invoiceList';
 
+// can be assigend locally. InvoiceList still remains a dumb component.
+export const headers = ['Product Name', 'Quantity', 'Value'];
+
 const ProductDetails = ({
 	userFormData,
 	products,
@@ -11,9 +14,6 @@ const ProductDetails = ({
 	onEditCustomer,
 	onProductFormSubmit
 }) => {
-	// can be assigend locally. InvoiceList still remains a dumb component.
-	const headers = ['Product Name', 'Quantity', 'Value'];
-
 	return (
 		<Fragment>
 			<FormHeader
