@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 import { InputField, InputTextArea } from 'components/forms/field';
 import gridTheme from 'styles/grid.scss';
+import defaultTheme from './userForm.scss';
 
 class UserForm extends Component {
 	render() {
@@ -74,4 +75,4 @@ class UserForm extends Component {
 	}
 }
 
-export default themr('UserForm', gridTheme)(UserForm);
+export default themr('UserForm', { ...defaultTheme, ...gridTheme })(UserForm);

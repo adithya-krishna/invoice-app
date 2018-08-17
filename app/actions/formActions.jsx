@@ -1,3 +1,6 @@
+import map from 'lodash/map';
+import { formatMoney } from 'utils';
+
 const counter = () => {
 	let count = 1000;
 	return () => {
@@ -25,10 +28,17 @@ export default class FormActions {
 	};
 
 	static saveInvoice = (id, data) => {
+		const parsedData = {
+			...data,
+			products: map(data.products, product => ({
+				...product,
+				formattedValue: formatMoney(product.value)
+			}))
+		};
 		FormActions.resetForm();
 		return {
 			type: FormActions.SAVE_INVOICE_FORM,
-			payload: { [id]: data }
+			payload: { [id]: parsedData }
 		};
 	};
 }

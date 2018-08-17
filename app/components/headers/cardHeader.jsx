@@ -13,7 +13,9 @@ const CardHeader = ({ theme, invoiceID, customer }) => {
 							<td className={theme.details}>customer details</td>
 						</tr>
 						<tr>
-							<td className={theme.invoiceNumber}>{invoiceID}</td>
+							<td className={theme.invoiceNumber}>
+								#{invoiceID}
+							</td>
 							<td className={theme.name}>{customer.name}</td>
 						</tr>
 						<tr>

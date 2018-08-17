@@ -4,9 +4,14 @@ import FormHeader from 'components/headers/formHeader';
 import InvoiceList from 'components/lists/invoiceList';
 
 // can be assigend locally. InvoiceList still remains a dumb component.
-export const headers = ['Product Name', 'Quantity', 'Value'];
+export const headers = [
+	'Product Name',
+	'Quantity',
+	<span>Value - &#8377;</span>
+];
 
 const ProductDetails = ({
+	theme,
 	userFormData,
 	products,
 	productFormData,
@@ -23,6 +28,7 @@ const ProductDetails = ({
 			/>
 
 			<InvoiceList
+				theme={theme}
 				headers={headers}
 				entries={products}
 				editable

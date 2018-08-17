@@ -3,11 +3,26 @@ import { themr } from 'react-css-themr';
 import { connect } from 'react-redux';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
+import { Button } from 'react-toolbox/lib/button';
 
 import defaultTheme from './newInvoice.scss';
 import DialogHeader from 'components/headers/dialogHeader';
 import CustomerDetails from 'components/mainContent/customerDetails';
 import ProductDetails from 'components/mainContent/productDetails';
+
+import { Navigation } from 'react-toolbox/lib/navigation';
+
+const NavigationFooter = ({ onClickHandler, rightButtonLabel, theme }) => (
+	<Navigation type="horizontal" theme={theme} className={theme.navigation}>
+		<Button
+			label={rightButtonLabel}
+			primary
+			raised
+			onClick={onClickHandler}
+			theme={theme}
+		/>
+	</Navigation>
+);
 
 const initialProductFormData = {
 	itemName: '',
@@ -37,28 +52,6 @@ class NewInvoiceDialog extends Component {
 			products: [],
 			productFormData: { ...initialProductFormData }
 		};
-	};
-
-	getActionButton = () => {
-		const { isCustomerDetailsPage } = this.state;
-		const { theme } = this.props;
-		return [
-			isCustomerDetailsPage
-				? {
-						label: 'Proceed',
-						primary: true,
-						raised: true,
-						onClick: this.onCustomerDetailsSubmit,
-						theme
-				  }
-				: {
-						label: 'Save',
-						primary: true,
-						raised: true,
-						onClick: this.onProductDetailsSubmit,
-						theme
-				  }
-		];
 	};
 
 	onCustomerDetailsSubmit = () => {
@@ -125,10 +118,14 @@ class NewInvoiceDialog extends Component {
 			isCustomerDetailsPage
 		} = this.state;
 
+		const rightButtonClickHandler = isCustomerDetailsPage
+			? this.onCustomerDetailsSubmit
+			: this.onProductDetailsSubmit;
+		const rightButtonLabel = isCustomerDetailsPage ? 'Proceed' : 'Save';
+
 		return (
 			<Dialog
 				theme={theme}
-				actions={this.getActionButton()}
 				active={active}
 				onEscKeyDown={handleToggle}
 				onOverlayClick={handleToggle}
@@ -154,9 +151,17 @@ class NewInvoiceDialog extends Component {
 						handleToggle={handleToggle}
 						onEditCustomer={this.onEditCustomer}
 						onFieldChange={this.onFieldChange}
+						theme={theme}
 						onProductFormSubmit={this.onProductFormSubmit}
 					/>
 				)}
+
+				<NavigationFooter
+					onClickHandler={this.onCustomerDetailsSubmit}
+					rightButtonLabel={rightButtonLabel}
+					theme={theme}
+					onClickHandler={rightButtonClickHandler}
+				/>
 			</Dialog>
 		);
 	}

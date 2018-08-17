@@ -16,18 +16,20 @@ class InvoiceListItem extends Component {
 					[theme.invoiceBody]: !header
 				})}
 			>
-				{map(items, (item, itemIndex) => (
-					<div
-						key={`${item}${itemIndex}`}
-						className={classnames(
-							theme.col,
-							{ [theme.col__2_of_4]: itemIndex === 0 },
-							{ [theme.col__1_of_4]: itemIndex !== 0 }
-						)}
-					>
-						{item}
-					</div>
-				))}
+				{map(items, (item, itemIndex) => {
+					return (
+						<div
+							key={`${item}${itemIndex}`}
+							className={classnames(
+								theme.col,
+								{ [theme.col__2_of_4]: itemIndex === 0 },
+								{ [theme.col__1_of_4]: itemIndex !== 0 }
+							)}
+						>
+							{item}
+						</div>
+					);
+				})}
 			</div>
 		);
 	}

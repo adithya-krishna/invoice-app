@@ -1,3 +1,6 @@
+@import 'styles/colors.scss';
+$borderColor: color(solitude);
+
 %remove-margin {
 	margin: 0;
 }
@@ -30,11 +33,27 @@
 .invoiceHeader,
 .invoiceBody {
 	@extend %remove-margin;
-	border-top: 1px solid #bababa;
-	border-bottom: 1px solid #bababa;
+	border-top: 1px solid $borderColor;
+	border-bottom: 1px solid $borderColor;
 	font-size: 0.8rem;
 	font-weight: 500;
 	line-height: 2.8rem;
+	text-align: center;
+
+	div:first-child:not(.formGroup) {
+		text-align: left;
+	}
+
+	div:last-child:not(.formGroup) {
+		text-align: right;
+		padding-right: 20px;
+	}
+}
+
+.invoiceHeader {
+	color: color(manatee);
+	border-top: 1px solid darken($borderColor, 5%);
+	border-bottom: 1px solid darken($borderColor, 5%);
 }
 
 .subTotalGrandTotal {

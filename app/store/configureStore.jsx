@@ -23,12 +23,14 @@ export default function configureStore() {
 						{
 							itemName: 'hello',
 							quantity: '1',
-							value: '1'
+							value: '1',
+							formattedValue: '1.00'
 						},
 						{
 							itemName: 'hello',
 							quantity: '3',
-							value: '1'
+							value: '1',
+							formattedValue: '1.00'
 						}
 					]
 				}

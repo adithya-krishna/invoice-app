@@ -1,9 +1,12 @@
+@import 'styles/colors.scss';
+$borderColor: darken(color(solitude), 5%);
+
 .wrapper {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 1rem;
+	border-bottom: 1px solid $borderColor;
+	margin: 0 1.4rem 1rem;
 
 	.title {
 		font-weight: bold;
