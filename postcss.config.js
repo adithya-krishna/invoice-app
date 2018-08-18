@@ -5,15 +5,17 @@ var postcssEach = require('postcss-each');
 var postcssApply = require('postcss-apply');
 var postcssNesting = require('postcss-nesting');
 var postcssReporter = require('postcss-reporter');
-
+var path = require('path');
 const reactToolboxVariables = require('./css-overrides');
 
 module.exports = ctx => ({
-	syntax: 'postcss-scss',
 	sourceMap: true,
 	plugins: [
 		postcssImport({
-			addModulesDirectories: ['node_modules', 'app']
+			addModulesDirectories: [
+				path.join(__dirname, 'node_modules/react-toolbox'),
+				'app'
+			]
 		}),
 		postcssMixins(),
 		postcssEach(),
@@ -21,13 +23,13 @@ module.exports = ctx => ({
 		postcssNesting(),
 		postcssPresetEnv({
 			stage: 0,
+			browserslist: ['last 2 versions', 'ios >= 8'],
 			features: {
 				'custom-properties': {
 					preserve: false,
 					variables: reactToolboxVariables
 				}
 			},
-			browserslist: ['last 2 versions', 'ios >= 8'],
 			autoprefixer: {
 				grid: true
 			}
