@@ -5,10 +5,36 @@ $standardBorderRadius: 4px;
 	background-color: color(solitude);
 	border-bottom-left-radius: $standardBorderRadius;
 	border-bottom-right-radius: $standardBorderRadius;
-	text-align: right;
+	display: flex;
 
 	&.horizontal {
 		padding: 16px;
+
+		.left,
+		.right {
+			display: flex;
+			flex: 1;
+			align-items: center;
+
+			.statistic {
+				.label,
+				.value {
+					font-size: 0.7rem;
+					font-weight: 600;
+					text-align: left;
+					margin: 0 1rem;
+				}
+
+				.value {
+					font-size: 0.9rem;
+					color: darken(color(solitude), 25%);
+				}
+			}
+		}
+
+		.right {
+			justify-content: flex-end;
+		}
 	}
 
 	.button {
@@ -36,5 +62,39 @@ $standardBorderRadius: 4px;
 				margin: 1.4rem;
 			}
 		}
+	}
+}
+
+.footerFormWrapper {
+	display: flex;
+	padding: 1rem 1.4rem 0;
+
+	.left,
+	.right {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		border-top: 1px solid color(solitude);
+		min-height: 4rem;
+
+		.formGroup {
+			max-width: 7rem;
+			margin-right: 1rem;
+			margin-bottom: 0;
+		}
+
+		.label,
+		.value {
+			font-size: 0.7rem;
+			margin: 0 1rem;
+		}
+
+		.value {
+			font-weight: 600;
+		}
+	}
+
+	.right {
+		justify-content: flex-end;
 	}
 }

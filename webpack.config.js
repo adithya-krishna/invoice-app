@@ -2,28 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
-const reactToolboxVariables = require('./css-overrides');
 
 const extractSass = new ExtractTextPlugin({
 	filename: 'app.css'
 });
-
-const postcssOpts = {
-	sourceMap: true,
-	plugins: () => {
-		return [
-			postcssPresetEnv({
-				stage: 0,
-				features: {
-					'custom-properties': {
-						preserve: false,
-						variables: reactToolboxVariables
-					}
-				}
-			})
-		];
-	}
-};
 
 const vendorStyleLoaders = [
 	{
@@ -38,7 +20,11 @@ const vendorStyleLoaders = [
 	},
 	{
 		loader: 'postcss-loader',
-		options: postcssOpts
+		options: {
+			config: {
+				path: 'postcss.config.js'
+			}
+		}
 	}
 ];
 
@@ -56,7 +42,11 @@ const loaders = [
 	},
 	{
 		loader: 'postcss-loader',
-		options: postcssOpts
+		options: {
+			config: {
+				path: 'postcss.config.js'
+			}
+		}
 	},
 	{
 		loader: 'sass-loader',

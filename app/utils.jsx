@@ -24,8 +24,8 @@ export const formatMoney = (
 	let j = (j = valueString.length) > 3 ? j % 3 : 0;
 	return (
 		negativeSign +
-		(j ? valueString.substr(0, j) + decimalPoint : '') +
-		valueString.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + decimalPoint) +
+		(j ? valueString.substr(0, j) + separator : '') +
+		valueString.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + separator) +
 		(decimalPlaces
 			? decimalPoint +
 			  Math.abs(value - valueString)
@@ -33,4 +33,23 @@ export const formatMoney = (
 					.slice(2)
 			: '')
 	);
+};
+
+// there are at least 5 ways to convert string to number.
+// the methods below are chosen becuase of performance and most edge cases handled.
+// ref: https://coderwall.com/p/5tlhmw/converting-strings-to-number-in-javascript-pitfalls
+// parseFloat is chosen because it, along with isNaN and isFinite
+// handle the most edge cases when tested with typical
+// javascript datatypes and values.
+export const toNumber = value => {
+	const number = parseFloat(value);
+	if (!isNaN(number) && isFinite(value)) {
+		return number;
+	} else {
+		return 0;
+	}
+};
+
+export const isNumeric = value => {
+	return !isNaN(parseFloat(value)) && isFinite(value);
 };

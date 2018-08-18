@@ -118,3 +118,31 @@ $borderColor: color(solitude);
 		@extend %alignRight;
 	}
 }
+
+.subTotalListWrapper {
+	margin-left: auto;
+	.innerContent {
+		min-width: 14rem;
+		.entry {
+			display: flex;
+			.label,
+			.value {
+				line-height: 1rem;
+				flex: 1;
+				font-size: 0.7rem;
+			}
+			.value {
+				text-align: right;
+			}
+
+			&.grandTotal {
+				.label,
+				.value {
+					font-size: 0.9rem;
+					font-weight: 700;
+				}
+				margin-top: 0.6rem;
+			}
+		}
+	}
+}

@@ -26,7 +26,13 @@ const CardHeader = ({ theme, invoiceID, customer }) => {
 				</table>
 			</div>
 			<div className={theme.buttonWrapper}>
-				<Button label={'print'} icon={'print'} />
+				<Button
+					theme={theme}
+					label={'print'}
+					icon={'print'}
+					primary
+					flat
+				/>
 			</div>
 		</div>
 	);

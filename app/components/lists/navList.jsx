@@ -7,7 +7,11 @@ import { pluralize } from 'utils';
 import gridTheme from 'styles/grid.scss';
 import defaultTheme from './lists.scss';
 
-const NavList = ({ theme, invoice: { products, customer }, invoiceID }) => {
+const NavList = ({
+	theme,
+	invoice: { products, customer, grandTotal },
+	invoiceID
+}) => {
 	const totalProducts = products.length;
 	const productCountLabel = pluralize('item', totalProducts);
 	const columnClasses = classnames(theme.col, theme.col__1_of_2);
@@ -34,7 +38,7 @@ const NavList = ({ theme, invoice: { products, customer }, invoiceID }) => {
 					{customer.name}
 				</div>
 				<div className={classnames(columnClasses, theme.price)}>
-					3,500/-
+					&#8377; {grandTotal}
 				</div>
 			</div>
 		</div>

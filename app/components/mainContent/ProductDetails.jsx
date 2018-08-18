@@ -10,6 +10,8 @@ export const headers = [
 	<span>Value - &#8377;</span>
 ];
 
+export const entryNames = ['itemName', 'formattedQuantity', 'formattedValue'];
+
 const ProductDetails = ({
 	theme,
 	userFormData,
@@ -28,10 +30,11 @@ const ProductDetails = ({
 			/>
 
 			<InvoiceList
+				editable
 				theme={theme}
 				headers={headers}
 				entries={products}
-				editable
+				entryNames={entryNames}
 				productFormData={productFormData}
 				onFieldChange={onFieldChange}
 				onFormSubmit={onProductFormSubmit}

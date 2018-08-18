@@ -40,6 +40,7 @@ export const selectedInvoice = (state = null, action) => {
 	}
 };
 
+//selectors
 export const getSetectedInvoice = state => {
 	const { selectedInvoice } = state;
 	return state.invoices[selectedInvoice];

@@ -1,34 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { themr } from 'react-css-themr';
 import classnames from 'classnames';
 import { Card } from 'react-toolbox/lib/card';
-import map from 'lodash/map';
-import omit from 'lodash/omit';
 
 import defaultTheme from './mainContent.scss';
 
 import CardHeader from 'components/headers/cardHeader';
 import InvoiceList from 'components/lists/invoiceList';
 import SubTotalList from 'components/lists/subTotalList';
-import { headers } from './productDetails';
+import { headers, entryNames } from './productDetails';
 import { getSetectedInvoice } from 'reducers/invoices';
 
 const AppMainContent = ({ theme, selectedInvoiceEntry, selectedInvoice }) => {
 	const { products, customer } = selectedInvoiceEntry || {};
-	const productEntries = map(products, product => omit(product, ['value']));
+
 	return (
 		<article className={classnames(theme.contentWrapper)}>
 			<Card theme={theme}>
-				<CardHeader
-					theme={theme}
-					invoiceID={selectedInvoice}
-					customer={customer}
-				/>
+				{!products && !customer ? (
+					<div>Please select an invoice</div>
+				) : (
+					<Fragment>
+						<CardHeader
+							theme={theme}
+							invoiceID={selectedInvoice}
+							customer={customer}
+						/>
 
-				<InvoiceList headers={headers} entries={productEntries} />
+						<InvoiceList
+							headers={headers}
+							entries={products}
+							entryNames={entryNames}
+						/>
 
-				<SubTotalList />
+						<SubTotalList invoice={selectedInvoiceEntry} />
+					</Fragment>
+				)}
 			</Card>
 		</article>
 	);
