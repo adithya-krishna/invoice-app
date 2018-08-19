@@ -1,83 +1,62 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import reduce from 'lodash/reduce';
 
 import rootReducer from 'reducers';
+import data from './test.json';
+import { toNumber, formatMoney } from 'utils';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initialStore = {
-	invoices: {
-		INV1000: {
-			customer: {
-				name: 'Adithya Krishna',
-				phone: '08884403080',
-				address:
-					'#37, Flat No T2, Sai Senmar Res., 1st Cross, Chikka Banaswadi',
-				email: 'adi2348492@gmail.com',
-				pincode: '560033'
-			},
-			products: [
-				{
-					itemName: 'hello',
-					quantity: '1',
-					value: '1000',
-					formattedQuantity: '1.00',
-					formattedValue: '1,000.00'
-				},
-				{
-					itemName: 'hello',
-					quantity: '3',
-					value: '180',
-					formattedQuantity: '3.00',
-					formattedValue: '180.00'
-				}
-			],
-			grandTotal: '1,617.00',
-			subTotal: '1,540.00',
-			tax: '10.00',
-			discount: '5.00',
-			taxAmount: '154.00',
-			discountAmount: '77.00'
-		},
-		INV1002: {
-			customer: {
-				name: 'Krishna Kumar',
-				phone: '9880275768',
-				address: '#37, bangalore',
-				email: 'krish857@gmail.com',
-				pincode: '560033'
-			},
-			products: [
-				{
-					itemName: 'Milk',
-					quantity: '4',
-					value: '18',
-					formattedQuantity: '4.00',
-					formattedValue: '18.00'
-				},
-				{
-					itemName: 'Cigarettes',
-					quantity: '10',
-					value: '15',
-					formattedQuantity: '10.00',
-					formattedValue: '15.00'
-				},
-				{
-					itemName: 'Rice',
-					quantity: '1',
-					value: '250',
-					formattedQuantity: '1.00',
-					formattedValue: '250.00'
-				}
-			],
-			grandTotal: '533.36',
-			subTotal: '472.00',
-			tax: '18.00',
-			discount: '5.00',
-			taxAmount: '84.96',
-			discountAmount: '23.60'
+const handleTotalCalculation = (items, tax, discount) => {
+	let taxMultiplier = toNumber(tax) / 100;
+	let discountMultiplier = toNumber(discount) / 100;
+	if (taxMultiplier > 1) {
+		taxMultiplier = 0;
+	}
+	if (discountMultiplier > 1) {
+		discountMultiplier = 0;
+	}
+
+	let subTotal = reduce(
+		items,
+		(result, item) =>
+			result + toNumber(item.quantity) * toNumber(item.value),
+		0
+	);
+	const taxAmount = taxMultiplier > 0 ? taxMultiplier * subTotal : 0;
+	const discountAmount =
+		discountMultiplier > 0 ? discountMultiplier * subTotal : 0;
+	const grandTotal = subTotal + taxAmount - discountAmount;
+
+	return {
+		grandTotal: formatMoney(grandTotal),
+		subTotal: formatMoney(subTotal),
+		taxAmount: formatMoney(taxAmount),
+		discountAmount: formatMoney(discountAmount)
+	};
+};
+
+const randomIntFromInterval = (min, max) =>
+	Math.floor(Math.random() * (max - min + 1) + min);
+
+const invoices = data.reduce((result, dat) => {
+	const tax = randomIntFromInterval(5, 28);
+	const discount = randomIntFromInterval(0, 30);
+
+	return {
+		...result,
+		[dat.id]: {
+			...dat,
+			tax,
+			discount,
+			...handleTotalCalculation(dat.products, tax, discount)
 		}
-	},
+	};
+}, {});
+
+const initialStore = {
+	invoices: invoices,
 	activeInvoiceID: 'INV1002',
 	isInvoiceDialogOpen: false,
 	selectedInvoice: 'INV1002'

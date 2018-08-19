@@ -3,7 +3,6 @@ import { themr } from 'react-css-themr';
 import reduce from 'lodash/reduce';
 import map from 'lodash/map';
 import omit from 'lodash/omit';
-import { formatMoney } from 'utils';
 import { InputField } from 'components/forms/field';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
@@ -15,7 +14,7 @@ import DialogHeader from 'components/headers/dialogHeader';
 import CustomerDetails from 'components/mainContent/customerDetails';
 import ProductDetails from 'components/mainContent/productDetails';
 
-import { toNumber } from 'utils';
+import { toNumber, formatMoney } from 'utils';
 
 const Statictic = ({ theme, label, value, prefix = false, suffix = false }) => (
 	<div className={theme.statistic}>

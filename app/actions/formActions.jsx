@@ -1,5 +1,5 @@
 const counter = () => {
-	let count = 1000;
+	let count = 1050;
 	return () => {
 		return `INV${count++}`;
 	};

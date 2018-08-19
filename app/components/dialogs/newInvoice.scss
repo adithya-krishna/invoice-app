@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+$scrollbar-file: 'styles/scrollbars.scss';
 $standardBorderRadius: 4px;
 
 .navigation {
@@ -60,6 +61,9 @@ $standardBorderRadius: 4px;
 
 			.invoiceListWrapper {
 				margin: 1.4rem;
+				min-height: auto;
+				max-height: 20rem;
+				overflow-y: auto;
 			}
 		}
 	}

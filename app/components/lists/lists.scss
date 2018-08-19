@@ -24,9 +24,7 @@ $borderColor: color(solitude);
 }
 
 .invoiceListWrapper {
-	color: #212121;
-	max-height: 20rem;
-	overflow-y: auto;
+	min-height: 20rem;
 	margin: 1.8rem 0;
 }
 
