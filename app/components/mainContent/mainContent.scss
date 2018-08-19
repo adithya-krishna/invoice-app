@@ -13,13 +13,12 @@ $contentWrapperBGColor: color(solitude);
 
 	padding-bottom: 4rem;
 	padding-left: 16rem;
-	padding-top: 5rem;
+	padding-top: 1.8rem;
 
+	margin-top: 64px; //app bar height
 	overflow-y: auto;
-	color: #212121;
 	z-index: 1;
 	transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-
 	background-color: $contentWrapperBGColor;
 
 	composes: hover-spaced-6-8-dark from $scrollbar-file;
