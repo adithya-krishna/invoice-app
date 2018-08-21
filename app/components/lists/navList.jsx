@@ -9,10 +9,11 @@ import defaultTheme from './lists.scss';
 
 const NavList = ({
 	theme,
-	invoice: { products, customer, grandTotal },
+	customerName,
+	totalProducts,
+	grandTotal,
 	invoiceID
 }) => {
-	const totalProducts = products.length;
 	const productCountLabel = pluralize('item', totalProducts);
 	const columnClasses = classnames(theme.col, theme.col__1_of_2);
 
@@ -35,7 +36,7 @@ const NavList = ({
 			</div>
 			<div className={theme.row__no_gutter}>
 				<div className={classnames(columnClasses, theme.name)}>
-					{customer.name}
+					{customerName}
 				</div>
 				<div className={classnames(columnClasses, theme.price)}>
 					&#8377; {grandTotal}

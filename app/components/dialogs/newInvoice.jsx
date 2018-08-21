@@ -16,7 +16,7 @@ import ProductDetails from 'components/mainContent/productDetails';
 
 import { toNumber, formatMoney } from 'utils';
 
-const Statictic = ({ theme, label, value, prefix = false, suffix = false }) => (
+const Statistic = ({ theme, label, value, prefix = false, suffix = false }) => (
 	<div className={theme.statistic}>
 		<div className={theme.label}>{label}</div>
 		<div className={theme.value}>
@@ -76,13 +76,13 @@ const NavigationFooter = ({
 				<div className={theme.left}>
 					{isCustomerDetailsPage ? null : (
 						<Fragment>
-							<Statictic
+							<Statistic
 								suffix
 								theme={theme}
 								label={'Tax'}
 								value={formatMoney(tax)}
 							/>
-							<Statictic
+							<Statistic
 								suffix
 								theme={theme}
 								label={'Discount'}
@@ -93,7 +93,7 @@ const NavigationFooter = ({
 				</div>
 				<div className={theme.right}>
 					{isCustomerDetailsPage ? null : (
-						<Statictic
+						<Statistic
 							prefix
 							theme={theme}
 							label={'Grand Total'}

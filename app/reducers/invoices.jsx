@@ -3,6 +3,7 @@ import InvoiceActions from 'actions/invoiceActions';
 
 export const invoices = (state = {}, action) => {
 	switch (action.type) {
+		case InvoiceActions.GET_ALL_INVOICES_COMPLETE:
 		case FormActions.SAVE_INVOICE_FORM: {
 			return {
 				...state,
