@@ -15,7 +15,7 @@ import DialogHeader from 'components/headers/dialogHeader';
 import CustomerDetails from 'components/mainContent/customerDetails';
 import ProductDetails from 'components/mainContent/productDetails';
 
-import { toNumber, formatMoney } from 'utils';
+import { formatMoney, toNumber } from 'utils';
 
 const Statistic = ({ theme, label, value, prefix = false, suffix = false }) => (
 	<div className={theme.statistic}>
@@ -63,9 +63,7 @@ const NavigationFooter = ({
 					</div>
 					<div className={theme.right}>
 						<div className={theme.label}>Sub Total</div>
-						<div className={theme.value}>
-							&#8377; {formatMoney(subTotal)}
-						</div>
+						<div className={theme.value}>&#8377; {subTotal}</div>
 					</div>
 				</div>
 			)}
@@ -98,7 +96,7 @@ const NavigationFooter = ({
 							prefix
 							theme={theme}
 							label={'Grand Total'}
-							value={formatMoney(grandTotal)}
+							value={grandTotal}
 						/>
 					)}
 					<Button
@@ -158,30 +156,6 @@ class NewInvoiceDialog extends Component {
 		this.setState({ isCustomerDetailsPage: false });
 	};
 
-	handleTotalCalculation = (items, tax, discount) => {
-		let taxMultiplier = toNumber(tax) / 100;
-		let discountMultiplier = toNumber(discount) / 100;
-		if (taxMultiplier > 1) {
-			taxMultiplier = 0;
-		}
-		if (discountMultiplier > 1) {
-			discountMultiplier = 0;
-		}
-
-		let subTotal = reduce(
-			items,
-			(result, item) =>
-				result + toNumber(item.quantity) * toNumber(item.value),
-			0
-		);
-		const taxAmount = taxMultiplier > 0 ? taxMultiplier * subTotal : 0;
-		const discountAmount =
-			discountMultiplier > 0 ? discountMultiplier * subTotal : 0;
-		const grandTotal = subTotal + taxAmount - discountAmount;
-
-		return { grandTotal, subTotal, taxAmount, discountAmount };
-	};
-
 	onProductDetailsSubmit = () => {
 		const {
 			userFormData,
@@ -214,12 +188,12 @@ class NewInvoiceDialog extends Component {
 						invoiceID: activeInvoiceID,
 						customer: userFormData,
 						products,
-						grandTotal: formatMoney(grandTotal),
-						subTotal: formatMoney(subTotal),
+						grandTotal,
+						subTotal,
 						tax: formatMoney(tax),
 						discount: formatMoney(discount),
-						taxAmount: formatMoney(taxAmount),
-						discountAmount: formatMoney(discountAmount)
+						taxAmount,
+						discountAmount
 					});
 				});
 			}
@@ -236,6 +210,34 @@ class NewInvoiceDialog extends Component {
 			showSnackbar: !showSnackbar,
 			snackbarLabel: isEmpty(snackbarLabel) ? label : null
 		});
+	};
+
+	handleTotalCalculation = (items, tax, discount) => {
+		let taxMultiplier = toNumber(tax) / 100;
+		let discountMultiplier = toNumber(discount) / 100;
+		if (taxMultiplier > 1) {
+			taxMultiplier = 0;
+		}
+		if (discountMultiplier > 1) {
+			discountMultiplier = 0;
+		}
+
+		let subTotal = reduce(
+			items,
+			(result, item) =>
+				result + toNumber(item.quantity) * toNumber(item.value),
+			0
+		);
+		const taxAmount = taxMultiplier > 0 ? taxMultiplier * subTotal : 0;
+		const discountAmount =
+			discountMultiplier > 0 ? discountMultiplier * subTotal : 0;
+		const grandTotal = subTotal + taxAmount - discountAmount;
+		return {
+			grandTotal: formatMoney(grandTotal),
+			subTotal: formatMoney(subTotal),
+			taxAmount: formatMoney(taxAmount),
+			discountAmount: formatMoney(discountAmount)
+		};
 	};
 
 	onFieldChange = e => {

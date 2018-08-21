@@ -20,38 +20,6 @@ export const generateRandomId = () =>
 		.slice(-8)
 		.toUpperCase();
 
-export const randomIntFromInterval = (min, max) =>
-	Math.floor(Math.random() * (max - min + 1) + min);
-
-export const handleTotalCalculation = (items, tax, discount) => {
-	let taxMultiplier = toNumber(tax) / 100;
-	let discountMultiplier = toNumber(discount) / 100;
-	if (taxMultiplier > 1) {
-		taxMultiplier = 0;
-	}
-	if (discountMultiplier > 1) {
-		discountMultiplier = 0;
-	}
-
-	let subTotal = reduce(
-		items,
-		(result, item) =>
-			result + toNumber(item.quantity) * toNumber(item.value),
-		0
-	);
-	const taxAmount = taxMultiplier > 0 ? taxMultiplier * subTotal : 0;
-	const discountAmount =
-		discountMultiplier > 0 ? discountMultiplier * subTotal : 0;
-	const grandTotal = subTotal + taxAmount - discountAmount;
-
-	return {
-		grandTotal: formatMoney(grandTotal),
-		subTotal: formatMoney(subTotal),
-		taxAmount: formatMoney(taxAmount),
-		discountAmount: formatMoney(discountAmount)
-	};
-};
-
 export const formatMoney = (
 	value,
 	decimalPlaces = 2,
