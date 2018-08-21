@@ -20,7 +20,7 @@ class AppHeader extends Component {
 
 	handleSaveInvoice = data => {
 		const { activeInvoiceID, saveInvoice, toggleDialog } = this.props;
-		saveInvoice(activeInvoiceID, data);
+		saveInvoice({ ...data, invoiceID: activeInvoiceID });
 		toggleDialog();
 	};
 

@@ -1,10 +1,6 @@
-const counter = () => {
-	let count = 1050;
-	return () => {
-		return `INV${count++}`;
-	};
-};
-const index = counter();
+import axios from 'axios';
+import { BASE_URL } from 'config';
+import { generateRandomId } from 'utils';
 
 export default class FormActions {
 	static INIT_INVOICE_FORM = 'INIT_INVOICE_FORM';
@@ -14,7 +10,7 @@ export default class FormActions {
 	static initInvoiceForm = () => {
 		return {
 			type: FormActions.INIT_INVOICE_FORM,
-			payload: { id: index() }
+			payload: { id: generateRandomId() }
 		};
 	};
 
@@ -24,11 +20,15 @@ export default class FormActions {
 		};
 	};
 
-	static saveInvoice = (id, data) => {
+	static saveInvoice = data => {
 		FormActions.resetForm();
-		return {
-			type: FormActions.SAVE_INVOICE_FORM,
-			payload: { [id]: data }
+		return async dispatch => {
+			const response = await axios.post(`${BASE_URL}/save-invoice`, data);
+			const { data: savedInvoice } = response.data;
+			dispatch({
+				type: FormActions.SAVE_INVOICE_FORM,
+				payload: { [savedInvoice.invoiceID]: savedInvoice }
+			});
 		};
 	};
 }

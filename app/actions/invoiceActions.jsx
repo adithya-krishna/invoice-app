@@ -6,8 +6,7 @@ import {
 } from 'utils';
 import reduce from 'lodash/reduce';
 import map from 'lodash/map';
-
-const BASE_URL = 'http://localhost:5000';
+import { BASE_URL } from 'config';
 
 class InvoiceActions {
 	static SET_SELECTED_INVOICE = 'SET_SELECTED_INVOICE';
@@ -20,39 +19,10 @@ class InvoiceActions {
 				type: InvoiceActions.GET_ALL_INVOICES_START
 			});
 			try {
-				const response = await axios.get(`${BASE_URL}/getAllInvoices`);
-				const invoices = reduce(
-					response.data,
-					(result, dat) => {
-						const tax = randomIntFromInterval(5, 28);
-						const discount = randomIntFromInterval(0, 30);
-
-						return {
-							...result,
-							[dat.id]: {
-								...dat,
-								products: map(dat.products, product => ({
-									...product,
-									formattedValue: formatMoney(product.value),
-									formattedQuantity: formatMoney(
-										product.quantity
-									)
-								})),
-								tax,
-								discount,
-								...handleTotalCalculation(
-									dat.products,
-									tax,
-									discount
-								)
-							}
-						};
-					},
-					{}
-				);
+				const response = await axios.get(`${BASE_URL}/all-invoices`);
 				dispatch({
 					type: InvoiceActions.GET_ALL_INVOICES_COMPLETE,
-					payload: invoices
+					payload: response.data
 				});
 			} catch (error) {
 				console.error(error);

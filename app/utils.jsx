@@ -13,6 +13,13 @@ export const pluralize = (identifier = 'item', count = 0) => {
 	}
 };
 
+//ref: https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
+export const generateRandomId = () =>
+	Math.random()
+		.toString(36)
+		.slice(-8)
+		.toUpperCase();
+
 export const randomIntFromInterval = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1) + min);
 

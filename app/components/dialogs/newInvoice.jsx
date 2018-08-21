@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { themr } from 'react-css-themr';
 import reduce from 'lodash/reduce';
-import map from 'lodash/map';
-import omit from 'lodash/omit';
+import isEmpty from 'lodash/isEmpty';
+import forEach from 'lodash/forEach';
 import { InputField } from 'components/forms/field';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
 import { Button } from 'react-toolbox/lib/button';
 import { Navigation } from 'react-toolbox/lib/navigation';
+import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 import defaultTheme from './newInvoice.scss';
 import DialogHeader from 'components/headers/dialogHeader';
@@ -139,6 +140,8 @@ class NewInvoiceDialog extends Component {
 	getInitialState = () => {
 		return {
 			isCustomerDetailsPage: true,
+			showSnackbar: false,
+			snackbarLabel: null,
 			userFormData: { ...initialUserFormData },
 			products: [],
 			productFormData: { ...initialProductFormData },
@@ -182,6 +185,7 @@ class NewInvoiceDialog extends Component {
 	onProductDetailsSubmit = () => {
 		const {
 			userFormData,
+			productFormData,
 			products,
 			grandTotal,
 			subTotal,
@@ -190,24 +194,48 @@ class NewInvoiceDialog extends Component {
 			tax,
 			discount
 		} = this.state;
-		const { saveInvoice } = this.props;
+		const { saveInvoice, activeInvoiceID } = this.props;
 
-		this.resetDialog(() => {
-			saveInvoice({
-				customer: userFormData,
-				products,
-				grandTotal: formatMoney(grandTotal),
-				subTotal: formatMoney(subTotal),
-				tax: formatMoney(tax),
-				discount: formatMoney(discount),
-				taxAmount: formatMoney(taxAmount),
-				discountAmount: formatMoney(discountAmount)
-			});
+		let passThroughFlag = true;
+		forEach(productFormData, entry => {
+			if (passThroughFlag) {
+				passThroughFlag = isEmpty(entry);
+			}
 		});
+
+		if (!products.length && passThroughFlag) {
+			this.toggleSnackbar('Please add some products first');
+		} else {
+			if (!passThroughFlag) {
+				this.toggleSnackbar('Please submit the product first');
+			} else {
+				this.resetDialog(() => {
+					saveInvoice({
+						invoiceID: activeInvoiceID,
+						customer: userFormData,
+						products,
+						grandTotal: formatMoney(grandTotal),
+						subTotal: formatMoney(subTotal),
+						tax: formatMoney(tax),
+						discount: formatMoney(discount),
+						taxAmount: formatMoney(taxAmount),
+						discountAmount: formatMoney(discountAmount)
+					});
+				});
+			}
+		}
 	};
 
 	onEditCustomer = () => {
 		this.setState({ isCustomerDetailsPage: true });
+	};
+
+	toggleSnackbar = label => {
+		const { showSnackbar, snackbarLabel } = this.state;
+		this.setState({
+			showSnackbar: !showSnackbar,
+			snackbarLabel: isEmpty(snackbarLabel) ? label : null
+		});
 	};
 
 	onFieldChange = e => {
@@ -311,7 +339,9 @@ class NewInvoiceDialog extends Component {
 			tax,
 			discount,
 			grandTotal,
-			subTotal
+			subTotal,
+			showSnackbar,
+			snackbarLabel
 		} = this.state;
 
 		const rightButtonClickHandler = isCustomerDetailsPage
@@ -351,6 +381,14 @@ class NewInvoiceDialog extends Component {
 						onProductFormSubmit={this.onProductFormSubmit}
 					/>
 				)}
+
+				<Snackbar
+					active={showSnackbar}
+					action="Nice"
+					label={snackbarLabel}
+					timeout={4000}
+					onTimeout={this.toggleSnackbar}
+				/>
 
 				<NavigationFooter
 					theme={theme}
