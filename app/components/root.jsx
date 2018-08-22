@@ -12,6 +12,7 @@ import MainContent from 'components/mainContent/mainContent';
 const store = configureStore();
 
 /*----------  Wrapping redux Provider ----------*/
+/*----------  Wrapping with Fragment results in much cleaner compiled html. ----------*/
 export default class Root extends Component {
 	render() {
 		return (

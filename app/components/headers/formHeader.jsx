@@ -1,6 +1,5 @@
 import React from 'react';
 import { themr } from 'react-css-themr';
-import classnames from 'classnames';
 
 import defaultTheme from './formHeader.scss';
 
@@ -12,7 +11,7 @@ const FormHeader = ({
 	rightButtonIcon = 'skip_next',
 	rightButtonLabel = 'skip',
 	customer,
-	onEditCustomer
+	onRightButtonClick
 }) => {
 	const isCustomerPresent = !!customer;
 	return (
@@ -26,6 +25,7 @@ const FormHeader = ({
 						label={rightButtonLabel}
 						flat
 						primary
+						onClick={onRightButtonClick}
 					/>
 				</div>
 			) : (
@@ -41,7 +41,7 @@ const FormHeader = ({
 							icon={'border_color'}
 							flat
 							primary
-							onClick={onEditCustomer}
+							onClick={onRightButtonClick}
 						/>
 					</div>
 				</div>

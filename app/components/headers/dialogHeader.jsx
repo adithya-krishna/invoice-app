@@ -1,6 +1,5 @@
 import React from 'react';
 import { themr } from 'react-css-themr';
-import classnames from 'classnames';
 
 import { FontIcon } from 'react-toolbox/lib/font_icon';
 

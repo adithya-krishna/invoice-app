@@ -319,16 +319,27 @@ class NewInvoiceDialog extends Component {
 
 	onProductFormSubmit = () => {
 		const { products, productFormData } = this.state;
-		const updatedProductFormData = {
-			...productFormData,
-			formattedQuantity: formatMoney(productFormData.quantity),
-			formattedValue: formatMoney(productFormData.value)
-		};
-		// validate here
-		this.setState(
-			{ products: [...products, updatedProductFormData] },
-			this.resetProductForm
-		);
+
+		let incompleteFormFlag = false;
+		forEach(productFormData, entry => {
+			if (!incompleteFormFlag) {
+				incompleteFormFlag = isEmpty(entry);
+			}
+		});
+
+		if (incompleteFormFlag) {
+			this.toggleSnackbar('Please fill up the form before submitting.');
+		} else {
+			const updatedProductFormData = {
+				...productFormData,
+				formattedQuantity: formatMoney(productFormData.quantity),
+				formattedValue: formatMoney(productFormData.value)
+			};
+			this.setState(
+				{ products: [...products, updatedProductFormData] },
+				this.resetProductForm
+			);
+		}
 	};
 
 	render() {
@@ -370,6 +381,7 @@ class NewInvoiceDialog extends Component {
 						userFormData={userFormData}
 						handleToggle={handleToggle}
 						onFieldChange={this.onFieldChange}
+						onSkipClick={this.onCustomerDetailsSubmit}
 					/>
 				) : (
 					<ProductDetails

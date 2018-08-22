@@ -1,11 +1,4 @@
 import axios from 'axios';
-import {
-	randomIntFromInterval,
-	handleTotalCalculation,
-	formatMoney
-} from 'utils';
-import reduce from 'lodash/reduce';
-import map from 'lodash/map';
 import { BASE_URL } from 'config';
 
 class InvoiceActions {

@@ -4,7 +4,7 @@ import { themr } from 'react-css-themr';
 import classnames from 'classnames';
 import map from 'lodash/map';
 
-import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
+import { List, ListItem } from 'react-toolbox/lib/list';
 
 import defaultTheme from './appSideBar.scss';
 import NavList from 'components/lists/navList';

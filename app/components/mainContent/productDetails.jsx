@@ -26,7 +26,7 @@ const ProductDetails = ({
 			<FormHeader
 				title={'Product Details'}
 				customer={userFormData}
-				onEditCustomer={onEditCustomer}
+				onRightButtonClick={onEditCustomer}
 			/>
 
 			<InvoiceList
