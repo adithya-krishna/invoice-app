@@ -321,12 +321,10 @@ class NewInvoiceDialog extends Component {
 	onProductFormSubmit = () => {
 		const { products, productFormData } = this.state;
 
-		let incompleteFormFlag = false;
-		forEach(productFormData, entry => {
-			if (!incompleteFormFlag) {
-				incompleteFormFlag = isEmpty(entry);
-			}
-		});
+		let incompleteFormFlag =
+			isEmpty(productFormData.itemName) ||
+			isEmpty(productFormData.quantity) ||
+			isEmpty(productFormData.value);
 
 		if (incompleteFormFlag) {
 			this.toggleSnackbar('Please fill up the form before submitting.');

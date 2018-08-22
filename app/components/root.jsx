@@ -4,9 +4,12 @@ import './root.scss';
 
 import configureStore from 'store/configureStore';
 
-import AppHeader from 'components/headers/appHeader';
-import AppSideBar from 'components/sideBars/appSideBars';
-import MainContent from 'components/mainContent/mainContent';
+/*----------  grouping all components that are conatiners ----------*/
+/*----------  This patteren is questionable. ----------*/
+/*----------  But I have chosen this pattern to improve readability ----------*/
+import AppHeader from 'containers/appHeader';
+import AppSideBar from 'containers/appSideBars';
+import MainContent from 'containers/mainContent';
 
 /*----------  Configuring Store  ----------*/
 const store = configureStore();

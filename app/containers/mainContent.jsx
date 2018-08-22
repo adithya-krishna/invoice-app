@@ -9,7 +9,7 @@ import defaultTheme from './mainContent.scss';
 import CardHeader from 'components/headers/cardHeader';
 import InvoiceList from 'components/lists/invoiceList';
 import SubTotalList from 'components/lists/subTotalList';
-import { headers, entryNames } from './productDetails';
+import { headers, entryNames } from 'components/mainContent/productDetails';
 import { getSetectedInvoice } from 'reducers/invoices';
 
 const AppMainContent = ({ theme, selectedInvoiceEntry, selectedInvoice }) => {
