@@ -1,7 +1,12 @@
+/**
+ *	Action Creator: InvoiceActions
+ *	-	All Action Creators within the app have this signature.
+		This helps in localising Code.
+ */
 import axios from 'axios';
 import { BASE_URL } from 'config';
 
-class InvoiceActions {
+export default class InvoiceActions {
 	static SET_SELECTED_INVOICE = 'SET_SELECTED_INVOICE';
 	static GET_ALL_INVOICES_START = 'GET_ALL_INVOICES_START';
 	static GET_ALL_INVOICES_COMPLETE = 'GET_ALL_INVOICES_COMPLETE';
@@ -30,5 +35,3 @@ class InvoiceActions {
 		};
 	};
 }
-
-export default InvoiceActions;

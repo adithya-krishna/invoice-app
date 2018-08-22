@@ -1,3 +1,7 @@
+/**
+ *	Invoice App - Demo
+ *	-	Point of entry (containes babel polyfills)
+ */
 import 'babel-polyfill';
 import 'normalize.css';
 import React from 'react';

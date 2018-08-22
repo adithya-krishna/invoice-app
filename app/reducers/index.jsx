@@ -1,4 +1,7 @@
-// import map from 'lodash/map';
+/**
+ *	Reducer: RootReducer
+ *	-	combines all reducers to feed into the store.
+ */
 import { combineReducers } from 'redux';
 
 import { invoices, activeInvoiceID, selectedInvoice } from './invoices';

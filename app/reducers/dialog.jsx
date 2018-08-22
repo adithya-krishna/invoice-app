@@ -1,3 +1,7 @@
+/**
+ *	Reducer: isInvoiceDialogOpen
+ *	-	handles the opening of the	new invoice dialog
+ */
 import DialogActions from 'actions/dialogActions';
 
 export const isInvoiceDialogOpen = (state = false, action) => {

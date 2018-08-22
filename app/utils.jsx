@@ -1,5 +1,6 @@
-import reduce from 'lodash/reduce';
-
+/**
+ *	Utility Functions
+ */
 export const pluralize = (identifier = 'item', count = 0) => {
 	switch (count) {
 		case 0: {
@@ -13,7 +14,8 @@ export const pluralize = (identifier = 'item', count = 0) => {
 	}
 };
 
-//ref: https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
+// a very good way to generate a random string. JS FTW!
+// ref: https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
 export const generateRandomId = () =>
 	Math.random()
 		.toString(36)

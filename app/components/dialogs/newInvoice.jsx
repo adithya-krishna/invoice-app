@@ -3,7 +3,6 @@ import { themr } from 'react-css-themr';
 import reduce from 'lodash/reduce';
 import isEmpty from 'lodash/isEmpty';
 import forEach from 'lodash/forEach';
-import { InputField } from 'components/forms/field';
 
 import { Dialog } from 'react-toolbox/lib/dialog';
 import { Button } from 'react-toolbox/lib/button';
@@ -14,9 +13,11 @@ import defaultTheme from './newInvoice.scss';
 import DialogHeader from 'components/headers/dialogHeader';
 import CustomerDetails from 'components/mainContent/customerDetails';
 import ProductDetails from 'components/mainContent/productDetails';
-
+import { InputField } from 'components/forms/field';
 import { formatMoney, toNumber } from 'utils';
 
+/*----------  Components are only used within this component, so we declare it here.  ----------*/
+/*----------  Move to separate file if used elsewhere.  ----------*/
 const Statistic = ({ theme, label, value, prefix = false, suffix = false }) => (
 	<div className={theme.statistic}>
 		<div className={theme.label}>{label}</div>

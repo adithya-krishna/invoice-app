@@ -1,3 +1,10 @@
+/**
+ *	Store Configuration
+ *	-	Composing with the redux store with root reducers.
+ *	-	Redux dev tools is added here.
+ *	-	To simulate local dummy data, uncomment initail data and feed it to "initialStore.invoices"
+		This can be used to simulate offline data.
+ */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
@@ -8,9 +15,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialStore = {
 	invoices: {},
-	activeInvoiceID: 'INV1002',
+	activeInvoiceID: '',
 	isInvoiceDialogOpen: false,
-	selectedInvoice: 'INV1002'
+	selectedInvoice: ''
 };
 export default function configureStore() {
 	const store = createStore(

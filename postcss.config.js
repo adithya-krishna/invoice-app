@@ -1,3 +1,10 @@
+/**
+ *	Postcss Config
+ *	-	Most of these plugins are used by react toolbox.
+ *	-	since we use certain components only, we only compile relevant css from the package.
+ *	-	As seen below, postcss will handle browser support.
+		the browserlist given below will help in auto prefixes and polyfills
+ */
 var postcssImport = require('postcss-import');
 var postcssPresetEnv = require('postcss-preset-env');
 var postcssMixins = require('postcss-mixins');

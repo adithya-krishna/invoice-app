@@ -1,3 +1,9 @@
+/**
+ *	Reducer: Invoice Reducers
+ *	Selectors: getSetectedInvoice
+ *	-	Contains a set of reducers to reduce the invoice state.
+ *	-	Constains selectors to get selected invoice from state.
+ */
 import FormActions from 'actions/formActions';
 import InvoiceActions from 'actions/invoiceActions';
 
